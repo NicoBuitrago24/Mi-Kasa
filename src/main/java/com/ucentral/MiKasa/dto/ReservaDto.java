@@ -10,16 +10,17 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Data
 @ToString
-public class PropietarioDto implements Serializable {
+
+public class ReservaDto implements Serializable {
     private long serial;
     @NotBlank(message = "El nombre es obligatorio")
-    private String nombre;
+    private String fecha_inicio;
     @NotBlank(message = "El apellido es obligatorio")
-    private String apellido;
+    private String fecha_fin;
     @NotBlank(message = "El correo es obligatorio")
-    private String correo;
+    private String numerohuespedes;
     @NotBlank(message = "La contraseña es obligatorio")
-    private String contrasena;
-    @NotBlank(message = "El codigo del   inmueble es obligatorio")
-    private String inmueble;
+    private String tipohabitacion;
+    @NotBlank(message = "Tipo de pago es obligatorio")
+    private String tipodepago;
 }

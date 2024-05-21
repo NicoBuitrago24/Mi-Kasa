@@ -18,6 +18,8 @@ public class ClienteDto implements Serializable {
     private String apellido;
     @NotBlank(message = "El correo es obligatorio")
     private String correo;
+    @NotBlank(message = "El celular es obligatorio")
+    private String celular;
     @NotBlank(message = "La contraseña es obligatorio")
     private String contrasena;
 }
