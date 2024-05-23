@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<h1>Lista de Propietarios</h1>
+<a href="/propietarios/nuevo">Crear Nuevo Propietario</a>
+<table>
+    <tr>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Correo</th>
+        <th>Contrasena</th>
+        <th>Inmueble</th>
+        <th>Acciones</th>
+    </tr>
+    <tr th:each="propietario : ${propietarios}">
+        <td th:text="${propietario.nombre}"></td>
+        <td th:text="${propietario.apellido}"></td>
+        <td th:text="${propietario.correo}"></td>
+        <td th:text="${propietario.contrasena}"></td>
+        <td th:text="${propietario.inmueble}"></td>
+        <td>
+            <a th:href="@{/propietarios/modificar/{id}(id=${propietario.id})}">Editar</a>
+            <a th:href="@{/v/eliminar/{id}(id=${propietario.id})}">Eliminar</a>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

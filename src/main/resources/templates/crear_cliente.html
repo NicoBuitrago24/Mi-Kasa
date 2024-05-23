@@ -7,14 +7,6 @@
 </head>
 <body>
 <h1>Crear Cliente</h1>
-<!-- Mostrar mensaje de éxito -->
-<div th:if="${mensaje != null}" class="success-message">
-    <p th:text="${mensaje}"></p>
-</div>
-<!-- Mostrar mensaje de error -->
-<div th:if="${error != null}" class="error-message">
-    <p th:text="${error}"></p>
-</div>
 <form action="/clientes/nuevos" method="post">
     <label for="nombre">Nombre:</label><br>
     <input type="text" id="nombre" name="nombre" required><br>

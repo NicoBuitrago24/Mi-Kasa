@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Inmueble</title>
+</head>
+<body>
+<h1>Editar Equipo</h1>
+<form action="/inmuebles/modificar/{id}" method="post">
+    <label for="ciudad">Ciudad:</label><br>
+    <input type="text" id="ciudad" name="ciudad" value="${inmueble.ciudad}"><br>
+    <label for="barrio">Barrio:</label><br>
+    <input type="text" id="barrio" name="barrio" value="${inmueble.barrio}"><br>
+    <label for="descripcion">Descripcion:</label><br>
+    <input type="text" id="descripcion" name="descripcion" value="${inmueble.descripcion}"><br>
+    <label for="avaluo">Avaluo:</label><br>
+    <input type="text" id="avaluo" name="avaluo" value="${inmueble.avaluo}"><br>
+    <label for="avaluo">Estado:</label><br>
+    <input type="text" id="estado" name="estado" value="${inmueble.estado}"><br>
+    <label for="propietarios">Propietarios:</label><br>
+    <select id="propietarios" name="estadio">
+        <option value="">Seleccionar Propietario</option>
+        <th:block th:each="propieratio : ${propieratios}">
+            <option th:value="${propieratio.id}" th:text="${propieratio.nombre}" th:selected="${propieratio.id == inmueble.estadio.id}"></option>
+        </th:block>
+    </select>
+    <button type="submit">Guardar Cambios</button>
+</form>
+</body>
+</html>

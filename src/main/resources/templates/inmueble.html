@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Inmuebles</title>
+</head>
+<body>
+<h1>Lista de Inmuebles</h1>
+<a href="/inmuebles/nuevo">Crear Nuevo Inmueble</a>
+<table>
+    <tr>
+        <th>Ciudad</th>
+        <th>Barrio</th>
+        <th>Descripcion</th>
+        <th>Avaluo</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+    </tr>
+    <tr th:each="inmueble : ${inmuebles}">
+        <td th:text="${inmueble.ciudad}"></td>
+        <td th:text="${inmueble.barrio}"></td>
+        <td th:text="${inmueble.descripcion}"></td>
+        <td th:text="${inmueble.avaluo}"></td>
+        <td th:text="${inmueble.estado}"></td>
+        <td>
+            <a th:href="@{/inmuebles/modificar/{id}(id=${inmueble.id})}">Editar</a>
+            <a th:href="@{/inmuebles/eliminar/{id}(id=${inmueble.id})}">Eliminar</a>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

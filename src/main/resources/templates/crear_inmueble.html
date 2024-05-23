@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Inmueble</title>
+</head>
+<body>
+<h1>Crear Equipo</h1>
+<!-- Mostrar mensaje de éxito -->
+<div th:if="${mensaje != null}" class="success-message">
+    <p th:text="${mensaje}"></p>
+</div>
+<!-- Mostrar mensaje de error -->
+<div th:if="${error != null}" class="error-message">
+    <p th:text="${error}"></p>
+</div>
+    <form action="/equipos/nuevo" method="post">
+        <label for="ciudad">Ciudad:</label><br>
+        <input type="text" id="ciudad" name="ciudad" required><br>
+        <label for="barrio">Barrio:</label><br>
+        <input type="text" id="barrio" name="barrio" required><br>
+        <label for="descripcion">Descripcion:</label><br>
+        <input type="text" id="descripcion" name="descripcion" required><br>
+        <label for="avaluo">Avaluo:</label><br>
+        <input type="text" id="avaluo" name="avaluo" required><br>
+        <label for="estado">Estado:</label><br>
+        <input type="text" id="estado" name="estado" required><br>
+        <label for="propietario">Propietario:</label><br>
+        <select id="propietario" name="propietario" required>
+            <option value="">Seleccionar Propietario</option>
+            <th:block th:each="propietario : ${propietarios}">
+                <option th:value="${propietarios}" th:text="${propietarios.nombre}"></option>
+            </th:block>
+        </select>
+        <button type="submit">Crear</button>
+    </form>
+</body>
+</html>
