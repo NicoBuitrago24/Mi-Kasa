@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Cliente</title>
+</head>
+<body>
+<h1>Crear Cliente</h1>
+<!-- Mostrar mensaje de éxito -->
+<div th:if="${mensaje != null}" class="success-message">
+    <p th:text="${mensaje}"></p>
+</div>
+<!-- Mostrar mensaje de error -->
+<div th:if="${error != null}" class="error-message">
+    <p th:text="${error}"></p>
+</div>
+<form action="/clientes/nuevos" method="post">
+    <label for="nombre">Nombre:</label><br>
+    <input type="text" id="nombre" name="nombre" required><br>
+    <label for="apellido">Apellido:</label><br>
+    <input type="text" id="apellido" name="apellido" required><br>
+    <label for="correo">Correo:</label><br>
+    <input type="text" id="correo" name="correo" required><br>
+    <label for="celular">Celular:</label><br>
+    <input type="text" id="celular" name="celular" required><br>
+    <label for="contraseña">Contraseña:</label><br>
+    <input type="text" id="contraseña" name="contraseña" required><br>
+    <button type="submit">Crear</button>
+</form>
+</body>
+</html>
