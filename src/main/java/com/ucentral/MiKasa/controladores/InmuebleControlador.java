@@ -26,15 +26,10 @@ public class InmuebleControlador {
     @Autowired
     PropietarioServicio propietarioServicio;
 
-    @RequestMapping("/pruebas")
-    public String prueba() {
-        return "prueba";
-    }
-
     @GetMapping("/inmuebles")
     public String listarInmuebles(Model model) {
         logger.info("Obteniendo lista de inmuebles");
-        List<InmuebleDto> inmuebles = Servicioinmuebles.listarInmuebles();
+        List<InmuebleDto> inmuebles = Servicioinmuebles.obtenerInmuebles();
         if (inmuebles.isEmpty()) {
             model.addAttribute("mensaje", "No hay inmuebles");
         }
@@ -42,7 +37,7 @@ public class InmuebleControlador {
         return "inmuebles";
     }
 
-    @GetMapping("/inmuebles/nuevos")
+    @GetMapping("/inmuebles/nuevo")
     public String mostrarFormulario(Model model) {
         InmuebleDto inmuebleDto = new InmuebleDto();
         List<PropietarioDto> propietarios = propietarioServicio.obtenerPropietarios();
@@ -54,7 +49,7 @@ public class InmuebleControlador {
         return "crear_inmuebles";
     }
 
-    @PostMapping("/inmuebles/nuevos")
+    @PostMapping("/inmuebles/nuevo")
     public String crearInmueble(@ModelAttribute InmuebleDto inmuebleDto, Model model) {
         try {
             Servicioinmuebles.registrarInmueble(inmuebleDto);
@@ -91,7 +86,7 @@ public class InmuebleControlador {
         }
     }
 
-    @GetMapping("/inmueble/eliminar/{id}")
+    @GetMapping("/inmuebles/eliminar/{id}")
     public String eliminarInmueble(@PathVariable long id, Model model) {
         try {
             Servicioinmuebles.eliminarInmueble(id);

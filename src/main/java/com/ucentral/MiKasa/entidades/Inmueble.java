@@ -16,8 +16,8 @@ import java.util.List;
 @ToString
 public class Inmueble implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_INMUEBLES_REL")
-    @SequenceGenerator(name = "SEQ_INMUEBLES_REL", sequenceName = "SEQ_INMUEBLES_REL", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_INMU_REL")
+    @SequenceGenerator(name = "SEQ_INMU_REL", sequenceName = "SEQ_INMU_REL", allocationSize = 1)
     @Column(name = "INMU_CODIGO", nullable = false)
     private long serial;
 

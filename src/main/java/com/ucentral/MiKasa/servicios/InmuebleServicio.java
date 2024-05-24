@@ -30,7 +30,7 @@ public class InmuebleServicio {
 
     public void registrarInmueble(InmuebleDto inmuebleDto) {System.out.println("En pruebas");}
 
-    public List<InmuebleDto> listarInmuebles() {
+    public List<InmuebleDto> obtenerInmuebles() {
         List<Inmueble> inmuebles = inmuebleRepositorio.findAll();
         return modelMapper.map(inmuebles, new TypeToken<List<InmuebleDto>>() {}.getType());
     }
