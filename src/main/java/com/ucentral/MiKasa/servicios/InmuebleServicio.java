@@ -28,11 +28,17 @@ public class InmuebleServicio {
         this.clienteServicio = clienteServicio;
     }
 
-    public void registrarInmueble(InmuebleDto inmuebleDto) {System.out.println("En pruebas");}
+    public InmuebleDto registrarInmueble(InmuebleDto inmuebleDto) {
+        Inmueble inmueble = modelMapper.map(inmuebleDto, Inmueble.class);
+        inmueble = inmuebleRepositorio.save(inmueble);
+        return modelMapper.map(inmueble, InmuebleDto.class);
+    }
 
     public List<InmuebleDto> obtenerInmuebles() {
         List<Inmueble> inmuebles = inmuebleRepositorio.findAll();
-        return modelMapper.map(inmuebles, new TypeToken<List<InmuebleDto>>() {}.getType());
+        return inmuebles.stream()
+                .map(inmueble -> modelMapper.map(inmueble,InmuebleDto.class))
+                .collect(Collectors.toList());
     }
 
     public InmuebleDto obtenerInmuebleById(Long id) {
@@ -44,5 +50,7 @@ public class InmuebleServicio {
         Inmueble inmueble = modelMapper.map(inmuebleDto, Inmueble.class);
         inmuebleRepositorio.save(inmueble);
     }
-    public void eliminarInmueble(Long id) {inmuebleRepositorio.deleteById(id);}
+    public void eliminarInmueble(Long id) {inmuebleRepositorio.deleteById(id);
+        inmuebleRepositorio.deleteById(id);
+    }
 }

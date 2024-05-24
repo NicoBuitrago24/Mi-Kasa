@@ -29,7 +29,11 @@ public class PropietarioServicio implements Serializable {
         this.propietarioRepositorio = propietarioRepositorio;
     }
 
-    public void registrarPropietario(PropietarioDto propietarioDto) {System.out.println("En pruebas");}
+    public PropietarioDto registrarPropietario(PropietarioDto propietarioDto) {
+        Propietario propietario = modelMapper.map(propietarioDto, Propietario.class);
+        propietario = propietarioRepositorio.save(propietario);
+        return modelMapper.map(propietario, PropietarioDto.class);
+    }
 
     public List<PropietarioDto> obtenerPropietarios() {
         List<Propietario> propietarios = propietarioRepositorio.findAll();
