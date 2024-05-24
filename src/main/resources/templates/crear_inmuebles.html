@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crear Inmueble</title>
+    <title>Crear Inmuebles</title>
 </head>
 <body>
 <h1>Crear Inmueble</h1>
-</div>
-<form action="/inmuebles/nuevo" method="post">
+
+<form action="/inmuebles/nuevos" method="post">
     <label for="ciudad">Ciudad:</label><br>
     <input type="text" id="ciudad" name="ciudad" required><br>
     <label for="barrio">Barrio:</label><br>
@@ -26,6 +26,7 @@
             <option th:value="${propietarios}" th:text="${propietario.nombre}"></option>
         </th:block>
     </select>
+
     <button type="submit">Crear</button>
 </form>
 </body>

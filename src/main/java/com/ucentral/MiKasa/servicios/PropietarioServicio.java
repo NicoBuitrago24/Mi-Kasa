@@ -37,7 +37,7 @@ public class PropietarioServicio implements Serializable {
 
     public List<PropietarioDto> obtenerPropietarios() {
         List<Propietario> propietarios = propietarioRepositorio.findAll();
-        return modelMapper.map(propietarios, new TypeToken<List<InmuebleDto>>() {}.getType());
+        return modelMapper.map(propietarios, new TypeToken<List<PropietarioDto>>() {}.getType());
     }
 
     public PropietarioDto obtenerPropietarioById(Long id) {

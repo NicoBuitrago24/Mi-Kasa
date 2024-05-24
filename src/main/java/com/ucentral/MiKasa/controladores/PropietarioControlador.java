@@ -20,12 +20,12 @@ public class PropietarioControlador {
 
     @GetMapping("/propietarios")
     public String ListarPropietarios(Model model){
-        logger.info("Obteniendo lista de inmuebles");
+        logger.info("Obteniendo lista de propietarios");
         List<PropietarioDto> propietarios = servicioPropietario.obtenerPropietarios();
         if (propietarios.isEmpty()) {
-            model.addAttribute("mensaje", "No hay inmuebles");
+            model.addAttribute("mensaje", "No hay propietarios");
         }
-        model.addAttribute("inmuebles", propietarios);
+        model.addAttribute("propietarios", propietarios);
         return "propietario";
 
     }
@@ -41,7 +41,7 @@ public class PropietarioControlador {
         try{
             servicioPropietario.registrarPropietario(propietarioDto);
             model.addAttribute("mensaje", "Propietario registrado correctamente") ;
-            return "redirect:/propietario";
+            return "redirect:/propietarios";
 
         }catch(Exception e){
             model.addAttribute("error", "Error al registrar propietario"+ e.getMessage()); ;

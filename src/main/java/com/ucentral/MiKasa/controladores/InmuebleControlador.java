@@ -37,7 +37,7 @@ public class InmuebleControlador {
         return "inmuebles";
     }
 
-    @GetMapping("/inmuebles/nuevo")
+    @GetMapping("/inmuebles/nuevos")
     public String mostrarFormulario(Model model) {
         InmuebleDto inmuebleDto = new InmuebleDto();
         List<PropietarioDto> propietarios = propietarioServicio.obtenerPropietarios();
@@ -49,10 +49,11 @@ public class InmuebleControlador {
         return "crear_inmuebles";
     }
 
-    @PostMapping("/inmuebles/nuevo")
+    @PostMapping("/inmuebles/nuevos")
     public String crearInmueble(@ModelAttribute InmuebleDto inmuebleDto, Model model) {
         try {
             Servicioinmuebles.registrarInmueble(inmuebleDto);
+            System.out.println("si entra");
             model.addAttribute("mensaje", "Inmueble creado correctamente");
             return "redirect:/inmuebles";
         } catch (Exception e) {
