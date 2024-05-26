@@ -11,9 +11,9 @@ import java.io.Serializable;
 @ToString
 public class PagoDto implements Serializable {
     private Long id;
-    private String monto;
+    private int monto;
     private String fechadepago;
     private String metododepago;
-    private String numerodetrx;
+    private int numerodetrx;
     private String descripcion;
 }

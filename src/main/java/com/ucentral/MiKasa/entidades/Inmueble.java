@@ -1,13 +1,14 @@
 package com.ucentral.MiKasa.entidades;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.hibernate.annotations.Fetch;
 
 import java.io.Serializable;
 import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,11 +16,12 @@ import java.util.List;
 @Table(name = "INMU_REL")
 @ToString
 public class Inmueble implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_INMU_REL")
     @SequenceGenerator(name = "SEQ_INMU_REL", sequenceName = "SEQ_INMU_REL", allocationSize = 1)
     @Column(name = "INMU_CODIGO", nullable = false)
-    private long serial;
+    private long id;
 
     @Column(name = "INMU_CIUDAD", nullable = false)
     private String ciudad;
@@ -31,12 +33,22 @@ public class Inmueble implements Serializable {
     private String descripcion;
 
     @Column(name = "INMU_AVALUO", nullable = false)
-    private String avaluo;
-
-    @Column(name = "INMU_FOTOS", nullable = false)
-    private String fotos;
+    private int avaluo;
 
     @Column(name = "INMU_ESTADO", nullable = false)
     private String estado;
 
+    @Column(name = "INMU_APROBADO", nullable = false)
+    private boolean aprobado;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "FOTO_CODIGO", referencedColumnName = "FOTO_CODIGO")
+    private Foto fotos;
+
+    @OneToMany(mappedBy = "inmueble", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Reserva> reservas;
+
+    @ManyToOne
+    @JoinColumn(name = "PROPI_CODIGO", referencedColumnName = "PROPI_CODIGO")
+    private Propietario propietario;
 }

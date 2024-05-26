@@ -21,7 +21,7 @@ public class Foto {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_FOTO_REL")
     @SequenceGenerator(name = "SEQ_FOTO_REL", sequenceName = "SEQ_FOTO_REL", allocationSize = 1)
     @Column(name = "FOTO_CODIGO", nullable = false)
-    private long serial;
+    private long id;
 
     @Column(name = "FOTO_HABITACION", nullable = false)
     private String habitacion;
@@ -37,4 +37,8 @@ public class Foto {
 
     @Column(name = "FOTO_COCINA", nullable = false)
     private String cocina;
+
+    @OneToOne
+    @JoinColumn(name = "INMU_CODIGO", referencedColumnName = "INMU_CODIGO")
+    private Inmueble inmueble;
 }

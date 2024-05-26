@@ -10,24 +10,43 @@ import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ReservaServicio implements Serializable {
-
-    private final ModelMapper modelMapper;
-
     @Autowired
-    public ReservaServicio(ModelMapper modelMapper) {this.modelMapper = modelMapper;}
-
+    private ModelMapper modelMapper;
     @Autowired
-    ReservaRepositorio reservaRepositorio;
+    private ReservaRepositorio reservaRepositorio;
 
-    public void registrarReserva(ReservaDto reservaDto) {
-        reservaRepositorio.save(modelMapper.map(reservaDto, Reserva.class));
+    public ReservaDto registrarReserva(ReservaDto reservaDto) {
+        Reserva reserva = modelMapper.map(reservaDto, Reserva.class);
+        reserva = reservaRepositorio.save(reserva);
+        return modelMapper.map(reserva, ReservaDto.class);
     }
 
     public List<ReservaDto> obtenerReservas() {
-        TypeToken<List<ReservaDto>> typeToken =new TypeToken<>() {};
-        return modelMapper.map(reservaRepositorio.findAll(), typeToken.getType());
+        List<Reserva> reservas = reservaRepositorio.findAll();
+        return reservas.stream()
+                .map(reserva -> modelMapper.map(reserva,ReservaDto.class))
+                .collect(Collectors.toList());
     }
+
+    public ReservaDto obtenerReservaPorId(Long id) {
+        Optional<Reserva> optionalReserva = reservaRepositorio.findById(id);
+        return optionalReserva.map(reserva -> modelMapper.map(reserva, ReservaDto.class)).orElse(null);
+    }
+
+    public ReservaDto saveReserva (ReservaDto reservaDto){
+        Reserva reserva= modelMapper.map(reservaDto, Reserva.class);
+        reserva = reservaRepositorio.save(reserva);
+        return modelMapper.map(reserva, ReservaDto.class);
+    }
+
+    public void eliminarReserva(Long id){
+        reservaRepositorio.deleteById(id);
+    }
+
+
 }

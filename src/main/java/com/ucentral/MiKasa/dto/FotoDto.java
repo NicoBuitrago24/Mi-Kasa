@@ -1,5 +1,6 @@
 package com.ucentral.MiKasa.dto;
 
+import com.ucentral.MiKasa.entidades.Inmueble;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,5 +18,6 @@ public class FotoDto implements Serializable {
     private String frente;
     private String interior;
     private String cocina;
+    private InmuebleDto inmueble;
 }
 

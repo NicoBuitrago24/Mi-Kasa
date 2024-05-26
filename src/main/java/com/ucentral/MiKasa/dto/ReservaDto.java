@@ -13,7 +13,8 @@ public class ReservaDto implements Serializable {
     private long serial;
     private String fecha_inicio;
     private String fecha_fin;
-    private String numerohuespedes;
+    private int numerohuespedes;
     private String tipohabitacion;
     private String tipodepago;
+    private InmuebleDto inmueble;
 }

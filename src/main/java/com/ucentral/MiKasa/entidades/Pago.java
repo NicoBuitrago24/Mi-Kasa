@@ -21,10 +21,10 @@ public class Pago {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_PAGO_REL")
     @SequenceGenerator(name = "SEQ_PAGO_REL", sequenceName = "SEQ_PAGO_REL", allocationSize = 1)
     @Column(name = "PAGO_CODIGO", nullable = false)
-    private long serial;
+    private long id;
 
     @Column(name = "PAGO_MONTO", nullable = false)
-    private String monto    ;
+    private int monto    ;
 
     @Column(name = "PAGO_FECHADEPAGO", nullable = false)
     private String fechadepago;
@@ -33,7 +33,7 @@ public class Pago {
     private String metododepago;
 
     @Column(name = "PAGO_NUMERODETRX", nullable = false)
-    private String numerodetrx;
+    private int numerodetrx;
 
     @Column(name = "PAGO_DESCRIPCION", nullable = false)
     private String descripcion;

@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import java.io.Serializable;
+import java.util.List;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -15,5 +17,5 @@ public class PropietarioDto implements Serializable {
     private String apellido;
     private String correo;
     private String contrasena;
-    private String inmueble;
+    private List<InmuebleDto> inmuebles;
 }

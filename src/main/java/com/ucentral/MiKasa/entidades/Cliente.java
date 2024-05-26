@@ -21,7 +21,7 @@ public class Cliente {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_CLIEN_REL")
     @SequenceGenerator(name = "SEQ_CLIEN_REL", sequenceName = "SEQ_CLIEN_REL", allocationSize = 1)
     @Column(name = "CLIEN_CODIGO", nullable = false)
-    private long serial;
+    private long id;
 
     @Column(name = "CLIEN_NOMBRE", nullable = false)
     private String nombre;
@@ -33,7 +33,7 @@ public class Cliente {
     private String correo;
 
     @Column(name = "CLIEN_CELULAR", nullable = false)
-    private String celular;
+    private int celular;
 
     @Column(name = "CLIEN_CONTRASENA", nullable = false)
     private String contrasena;

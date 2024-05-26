@@ -21,7 +21,7 @@ public class Reserva implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_RESER_REL")
     @SequenceGenerator(name = "SEQ_RESER_REL", sequenceName = "SEQ_RESER_REL", allocationSize = 1)
     @Column(name = "RESER_CODIGO", nullable = false)
-    private long serial;
+    private long id;
 
     @Column(name = "RESER_FECHAINICIO", nullable = false)
     private String fecha_inicio;
@@ -30,7 +30,7 @@ public class Reserva implements Serializable {
     private String fecha_fin;
 
     @Column(name = "RESER_NUMEROHUESPEDES", nullable = false)
-    private String numerohuespedes;
+    private int numerohuespedes;
 
     @Column(name = "RESER_TIPODEHABITACION", nullable = false)
     private String tipohabitacion;
@@ -38,6 +38,8 @@ public class Reserva implements Serializable {
     @Column(name = "RESER_TIPODEPAGO", nullable = false)
     private String tipodepago;
 
-
+    @ManyToOne
+    @JoinColumn(name = "INMU_CODIGO", referencedColumnName = "INMU_CODIGO")
+    private Inmueble inmueble;
 
 }
