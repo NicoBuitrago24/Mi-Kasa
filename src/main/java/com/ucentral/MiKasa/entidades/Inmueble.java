@@ -33,7 +33,7 @@ public class Inmueble implements Serializable {
     private String descripcion;
 
     @Column(name = "INMU_AVALUO", nullable = false)
-    private int avaluo;
+    private String avaluo;
 
     @Column(name = "INMU_ESTADO", nullable = false)
     private String estado;

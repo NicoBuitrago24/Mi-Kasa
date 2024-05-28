@@ -24,7 +24,7 @@ public class Pago {
     private long id;
 
     @Column(name = "PAGO_MONTO", nullable = false)
-    private int monto    ;
+    private String monto    ;
 
     @Column(name = "PAGO_FECHADEPAGO", nullable = false)
     private String fechadepago;
@@ -33,7 +33,7 @@ public class Pago {
     private String metododepago;
 
     @Column(name = "PAGO_NUMERODETRX", nullable = false)
-    private int numerodetrx;
+    private String numerodetrx;
 
     @Column(name = "PAGO_DESCRIPCION", nullable = false)
     private String descripcion;

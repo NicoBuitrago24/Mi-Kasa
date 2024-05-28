@@ -9,11 +9,11 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Data
 @ToString
-public class PagoDto implements Serializable {
+public class FuncionarioDto implements Serializable {
     private Long id;
-    private Integer monto;
-    private String fechadepago;
-    private String metododepago;
-    private  Integer numerodetrx;
-    private String descripcion;
+    private String nombre;
+    private String apellido;
+    private String correo;
+    private String contrasena;
+    private String empresa;
 }

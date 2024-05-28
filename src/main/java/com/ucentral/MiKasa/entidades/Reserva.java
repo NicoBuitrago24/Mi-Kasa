@@ -30,7 +30,7 @@ public class Reserva implements Serializable {
     private String fecha_fin;
 
     @Column(name = "RESER_NUMEROHUESPEDES", nullable = false)
-    private int numerohuespedes;
+    private String numerohuespedes;
 
     @Column(name = "RESER_TIPODEHABITACION", nullable = false)
     private String tipohabitacion;

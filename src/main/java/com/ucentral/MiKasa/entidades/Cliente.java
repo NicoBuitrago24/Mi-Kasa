@@ -33,7 +33,7 @@ public class Cliente {
     private String correo;
 
     @Column(name = "CLIEN_CELULAR", nullable = false)
-    private int celular;
+    private String celular;
 
     @Column(name = "CLIEN_CONTRASENA", nullable = false)
     private String contrasena;

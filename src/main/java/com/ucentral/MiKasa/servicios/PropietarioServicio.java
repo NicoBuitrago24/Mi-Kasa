@@ -21,6 +21,11 @@ public class PropietarioServicio implements Serializable {
     @Autowired
     private  PropietarioRepositorio propietarioRepositorio;
 
+    public boolean esPropietario(String correo){
+        Optional<Propietario> propietario = propietarioRepositorio.findByCorreo(correo);
+        return propietario.isPresent();
+    }
+
     public PropietarioDto registrarPropietario(PropietarioDto propietarioDto) {
         Propietario propietario = modelMapper.map(propietarioDto, Propietario.class);
         propietario = propietarioRepositorio.save(propietario);
