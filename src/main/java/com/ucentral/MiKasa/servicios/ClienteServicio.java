@@ -22,6 +22,11 @@ public class ClienteServicio implements Serializable {
     @Autowired
     private ClienteRepositorio clienteRepositorio;
 
+    public boolean esCliente(String correo){
+        Optional<Cliente> cliente = clienteRepositorio.findByCorreo(correo);
+        return cliente.isPresent();
+    }
+
     public ClienteDto registrarCliente(ClienteDto clienteDto) {
         Cliente cliente = modelMapper.map(clienteDto, Cliente.class);
         cliente = clienteRepositorio.save(cliente);
