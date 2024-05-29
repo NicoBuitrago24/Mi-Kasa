@@ -7,8 +7,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-// prueba
 public class LoginDto {
     String correo;
-    String clave;
+    String contrasena;
 }

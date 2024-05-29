@@ -5,15 +5,17 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import java.io.Serializable;
+import java.util.Date;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @ToString
 public class PagoDto implements Serializable {
     private Long id;
-    private Integer monto;
-    private String fechadepago;
+    private int monto;
+    private Date fechadepago;
     private String metododepago;
-    private  Integer numerodetrx;
+    private int numerodetrx;
     private String descripcion;
 }

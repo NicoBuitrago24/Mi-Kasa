@@ -45,6 +45,11 @@ public class ClienteServicio implements Serializable {
         return optionalCliente.map(cliente -> modelMapper.map(cliente,ClienteDto.class)).orElse(null);
     }
 
+    public ClienteDto obtenerClientePorCorreo(String correo){
+        Optional<Cliente> optionalCliente = clienteRepositorio.findByCorreo(correo);
+        return optionalCliente.map(cliente -> modelMapper.map(cliente,ClienteDto.class)).orElse(null);
+    }
+
     public ClienteDto saveCliente(ClienteDto clienteDto) {
         Cliente cliente = modelMapper.map(clienteDto, Cliente.class);
         cliente = clienteRepositorio.save(cliente);

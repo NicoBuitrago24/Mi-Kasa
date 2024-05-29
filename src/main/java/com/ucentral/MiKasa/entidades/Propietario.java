@@ -4,10 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.hibernate.annotations.Fetch;
 
-import java.io.Serializable;
 import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -32,6 +31,9 @@ public class Propietario {
 
     @Column(name = "PROPI_CONTRASENA", nullable = false)
     private String contrasena;
+
+    @Column(name = "PROPI_CELULAR", nullable = false)
+    private int celular;
 
     @OneToMany(mappedBy = "propietario", cascade = CascadeType.ALL)
     private List<Inmueble> inmuebles;

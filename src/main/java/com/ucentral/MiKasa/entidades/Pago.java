@@ -8,6 +8,7 @@ import lombok.ToString;
 import org.hibernate.annotations.Fetch;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 @Data
 @NoArgsConstructor
@@ -24,16 +25,16 @@ public class Pago {
     private long id;
 
     @Column(name = "PAGO_MONTO", nullable = false)
-    private String monto    ;
+    private int monto    ;
 
     @Column(name = "PAGO_FECHADEPAGO", nullable = false)
-    private String fechadepago;
+    private Date fechadepago;
 
     @Column(name = "PAGO_METODODEPAGO", nullable = false)
     private String metododepago;
 
     @Column(name = "PAGO_NUMERODETRX", nullable = false)
-    private String numerodetrx;
+    private int numerodetrx;
 
     @Column(name = "PAGO_DESCRIPCION", nullable = false)
     private String descripcion;

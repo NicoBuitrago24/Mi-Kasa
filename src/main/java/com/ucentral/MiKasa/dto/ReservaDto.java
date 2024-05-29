@@ -4,6 +4,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import java.io.Serializable;
+import java.util.Date;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -11,9 +13,9 @@ import java.io.Serializable;
 
 public class ReservaDto implements Serializable {
     private long serial;
-    private String fecha_inicio;
-    private String fecha_fin;
-    private String numerohuespedes;
+    private Date fecha_inicio;
+    private Date fecha_fin;
+    private int numerohuespedes;
     private String tipohabitacion;
     private String tipodepago;
     private InmuebleDto inmueble;

@@ -14,6 +14,6 @@ public class ClienteDto implements Serializable {
     private String nombre;
     private String apellido;
     private String correo;
-    private Integer celular;
+    private int celular;
     private String contrasena;
 }

@@ -44,6 +44,11 @@ public class PropietarioServicio implements Serializable {
         return optionalPropietario.map(propietario-> modelMapper.map(propietario, PropietarioDto.class)).orElse(null);
     }
 
+    public PropietarioDto obtenerPropietarioPorCorreo(String correo) {
+        Optional<Propietario> optionalPropietario = propietarioRepositorio.findByCorreo(correo);
+        return optionalPropietario.map(prop -> modelMapper.map(prop, PropietarioDto.class)).orElse(null);
+    }
+
     public PropietarioDto savePropietario(PropietarioDto propietarioDto) {
         Propietario propietario = modelMapper.map(propietarioDto, Propietario.class);
         propietario= propietarioRepositorio.save(propietario);

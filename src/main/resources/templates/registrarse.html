@@ -8,41 +8,23 @@
         window.onload = function() {
             var roleSelect = document.getElementById('role');
             var commonFields = document.getElementById('common-fields');
-            var clienteFields = document.getElementById('cliente-fields');
-            var funcionarioFields = document.getElementById('funcionario-fields');
-            var propietarioFields = document.getElementById('propietario-fields');
 
             roleSelect.addEventListener('change', function() {
                 var selectedRole = this.value;
-
-                commonFields.classList.add('hidden');
-                clienteFields.classList.add('hidden');
-                funcionarioFields.classList.add('hidden');
-                propietarioFields.classList.add('hidden');
-
-                if (selectedRole === 'cliente') {
-                    clienteFields.classList.remove('hidden');
-                } else if (selectedRole === 'funcionario') {
-                    funcionarioFields.classList.remove('hidden');
-                } else if (selectedRole === 'propietario') {
-                    propietarioFields.classList.remove('hidden');
-                }
-
                 commonFields.classList.remove('hidden');
             });
         };
     </script>
 </head>
-
 <body>
 <div class="container">
     <div class="registrarse">
         <h2>Registro</h2>
         <div class="form">
-            <form id="registration-form">
+            <form id="registration-form" th:action="@{/registrarse}" method="post">
                 <div class="input-group">
                     <label for="role">Seleccione su rol</label>
-                    <select id="role" required>
+                    <select id="role" name="role" required>
                         <option value="">Seleccione...</option>
                         <option value="cliente">Cliente</option>
                         <option value="funcionario">Funcionario</option>
@@ -53,47 +35,59 @@
                 <div id="common-fields" class="hidden">
                     <div class="input-group">
                         <label for="nombre">Nombre</label>
-                        <input type="text" id="nombre" required>
+                        <input type="text" id="nombre" name="nombre" required>
                     </div>
                     <div class="input-group">
                         <label for="apellido">Apellido</label>
-                        <input type="text" id="apellido" required>
+                        <input type="text" id="apellido" name="apellido" required>
                     </div>
                     <div class="input-group">
                         <label for="correo">Correo</label>
-                        <input type="email" id="correo" required>
+                        <input type="email" id="correo" name="correo" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Ingrese un correo electrónico válido">
                     </div>
                     <div class="input-group">
                         <label for="contrasena">Contraseña</label>
-                        <input type="password" id="contrasena" required>
+                        <input type="password" id="contrasena" name="contrasena" required>
                     </div>
-                </div>
-
-                <div id="cliente-fields" class="additional-fields hidden">
                     <div class="input-group">
                         <label for="celular">Celular</label>
-                        <input type="tel" id="celular" required>
+                        <input type="number" id="celular" name="celular" required>
                     </div>
+                    <button type="submit" class="btn">Registrarse</button>
                 </div>
-
-                <div id="funcionario-fields" class="additional-fields hidden">
-                    <div class="input-group">
-                        <label for="empresa">Empresa</label>
-                        <input type="text" id="empresa" required>
-                    </div>
-                </div>
-
-                <div id="propietario-fields" class="additional-fields hidden">
-                    <div class="input-group">
-                        <label for="inmueble">Inmueble</label>
-                        <input type="text" id="inmueble" required>
-                    </div>
-                </div>
-
-                <button type="submit" class="btn">Registrarse</button>
             </form>
         </div>
+        <br>
+        <br>
+        <a href="/" class="btn">Volver</a>
     </div>
 </div>
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('form').submit(function(e) {
+            e.preventDefault();
+            var formData = $(this).serialize();
+
+            $.ajax({
+                url: '/registrarse',
+                type: 'POST',
+                data: formData,
+                success: function(result) {
+                    if (result === 'success') {
+                        alert('Registro exitoso');
+                        window.location.href = '/';
+                    } else {
+                        alert('Error en el registro');
+                    }
+                },
+                error: function(err) {
+                    console.error('Error al enviar la solicitud:', err);
+                    alert('Ocurrió un error al registrarse. Por favor, inténtalo de nuevo más tarde.');
+                }
+            });
+        });
+    });
+</script>
 </html>

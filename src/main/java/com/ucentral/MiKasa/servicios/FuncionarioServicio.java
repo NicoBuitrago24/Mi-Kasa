@@ -1,6 +1,8 @@
 package com.ucentral.MiKasa.servicios;
 
+import com.ucentral.MiKasa.dto.ClienteDto;
 import com.ucentral.MiKasa.dto.FuncionarioDto;
+import com.ucentral.MiKasa.entidades.Cliente;
 import com.ucentral.MiKasa.entidades.Funcionario;
 import com.ucentral.MiKasa.repositorios.FuncionarioRepositorio;
 import org.modelmapper.ModelMapper;
@@ -26,7 +28,7 @@ public class FuncionarioServicio implements Serializable {
         return funcionario.isPresent();
     }
 
-    public FuncionarioDto RegistrarFuncionario(FuncionarioDto funcionarioDto) {
+    public FuncionarioDto registrarFuncionario(FuncionarioDto funcionarioDto) {
         Funcionario funcionario = modelMapper.map(funcionarioDto, Funcionario.class);
         funcionario = funcionarioRepositorio.save(funcionario);
         return modelMapper.map(funcionario, FuncionarioDto.class);
@@ -37,6 +39,10 @@ public class FuncionarioServicio implements Serializable {
         return funcionarios.stream()
                 .map(funcionario -> modelMapper.map(funcionario, FuncionarioDto.class))
                 .collect(Collectors.toList());
+    }
+    public FuncionarioDto obtenerFuncionarioPorCorreo(String correo){
+        Optional<Funcionario> optionalFuncionario = funcionarioRepositorio.findByCorreo(correo);
+        return optionalFuncionario.map(funcionario -> modelMapper.map(funcionario,FuncionarioDto.class)).orElse(null);
     }
 
     public FuncionarioDto obtenerFuncionarioPorId(Long id) {
@@ -53,15 +59,4 @@ public class FuncionarioServicio implements Serializable {
     public void eliminarFuncionario(Long id) {
         funcionarioRepositorio.deleteById(id);
     }
-
-
-
-
-
-
-
-
-
-
-
 }

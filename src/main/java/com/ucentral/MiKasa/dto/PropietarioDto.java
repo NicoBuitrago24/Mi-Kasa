@@ -17,5 +17,6 @@ public class PropietarioDto implements Serializable {
     private String apellido;
     private String correo;
     private String contrasena;
+    private int celular;
     private List<InmuebleDto> inmuebles;
 }

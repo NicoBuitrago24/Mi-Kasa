@@ -35,7 +35,7 @@ public class Funcionario {
     @Column(name = "FUNCI_CONTRASENA", nullable = false)
     private String contrasena;
 
-    @Column(name = "FUNCI_EMPRESA", nullable = false)
-    private String empresa;
+    @Column(name = "FUNCI_CELULAR", nullable = false)
+    private int celular;
 
 }

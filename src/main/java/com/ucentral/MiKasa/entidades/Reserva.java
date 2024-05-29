@@ -5,10 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.hibernate.annotations.Fetch;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Date;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -24,13 +24,13 @@ public class Reserva implements Serializable {
     private long id;
 
     @Column(name = "RESER_FECHAINICIO", nullable = false)
-    private String fecha_inicio;
+    private Date fecha_inicio;
 
     @Column(name = "RESER_FECHAFIN", nullable = false)
-    private String fecha_fin;
+    private Date fecha_fin;
 
     @Column(name = "RESER_NUMEROHUESPEDES", nullable = false)
-    private String numerohuespedes;
+    private int numerohuespedes;
 
     @Column(name = "RESER_TIPODEHABITACION", nullable = false)
     private String tipohabitacion;
