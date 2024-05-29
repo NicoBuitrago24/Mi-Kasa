@@ -1,8 +1,6 @@
 package com.ucentral.MiKasa.servicios;
 
-import com.ucentral.MiKasa.dto.ClienteDto;
 import com.ucentral.MiKasa.dto.FuncionarioDto;
-import com.ucentral.MiKasa.entidades.Cliente;
 import com.ucentral.MiKasa.entidades.Funcionario;
 import com.ucentral.MiKasa.repositorios.FuncionarioRepositorio;
 import org.modelmapper.ModelMapper;
