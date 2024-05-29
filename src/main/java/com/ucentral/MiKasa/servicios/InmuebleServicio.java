@@ -45,4 +45,11 @@ public class InmuebleServicio {
     public void eliminarInmueble(Long id) {
         inmuebleRepositorio.deleteById(id);
     }
+
+    public List<InmuebleDto> obtenerInmueblesPorPropietario(Long propietarioId) {
+        List<Inmueble> inmuebles = inmuebleRepositorio.findByPropietarioId(propietarioId);
+        return inmuebles.stream()
+                .map(inmueble -> modelMapper.map(inmueble, InmuebleDto.class))
+                .collect(Collectors.toList());
+    }
 }

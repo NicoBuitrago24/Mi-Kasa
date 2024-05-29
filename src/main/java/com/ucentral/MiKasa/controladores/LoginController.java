@@ -67,9 +67,9 @@ public class LoginController {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Acceso erroneo");
     }
 
-    @GetMapping("/logout")
-    public String logout(SessionStatus sessionStatus) {
+    @PostMapping("/logout")
+    public ResponseEntity<String> logout(SessionStatus sessionStatus) {
         sessionStatus.setComplete();
-        return "redirect:/";
+        return ResponseEntity.ok("exitoso");
     }
 }

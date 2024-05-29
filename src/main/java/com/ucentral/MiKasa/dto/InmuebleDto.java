@@ -16,7 +16,7 @@ public class InmuebleDto implements Serializable {
     private String barrio;
     private String descripcion;
     private int avaluo;
-    private String estado;
+    private String direccion;
     private boolean aprobado;
     private FotoDto fotos;
     private PropietarioDto propietario;

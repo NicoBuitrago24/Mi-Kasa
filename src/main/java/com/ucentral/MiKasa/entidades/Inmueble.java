@@ -35,8 +35,8 @@ public class Inmueble implements Serializable {
     @Column(name = "INMU_AVALUO", nullable = false)
     private int avaluo;
 
-    @Column(name = "INMU_ESTADO", nullable = false)
-    private String estado;
+    @Column(name = "INMU_DIRECCION", nullable = false)
+    private String direccion;
 
     @Column(name = "INMU_APROBADO", nullable = false)
     private boolean aprobado;
