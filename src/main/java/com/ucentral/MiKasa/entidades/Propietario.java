@@ -33,7 +33,7 @@ public class Propietario {
     private String contrasena;
 
     @Column(name = "PROPI_CELULAR", nullable = false)
-    private int celular;
+    private String celular;
 
     @OneToMany(mappedBy = "propietario", cascade = CascadeType.ALL)
     private List<Inmueble> inmuebles;

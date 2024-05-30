@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Propietario</title>
-    <link rel="stylesheet" href="/css/styleTable.css">
+    <link rel="stylesheet" href="/css/stylePropietario.css">
 </head>
 <body>
 <div class="container">
@@ -17,7 +17,7 @@
             <th>Avaluo</th>
             <th>Direccion</th>
             <th>Aprobado</th>
-            <th>Detalles</th>
+            <th>Acciones</th>
         </tr>
         </thead>
         <tbody>
@@ -33,7 +33,10 @@
                 <td th:text="${inmueble.avaluo}"></td>
                 <td th:text="${inmueble.direccion}"></td>
                 <td th:text="${inmueble.aprobado} ? 'Si' : 'No'"></td>
-                <td><button class="details-btn">Ver detalles</button></td>
+                <td>
+                    <button class="details-btn" onclick="verDetalles()">Detalles</button>
+                    <button class="eliminar-inmueble" th:attr="data-id=${inmueble.id}">Eliminar</button>
+                </td>
             </tr>
         </th:block>
         </tbody>
@@ -41,6 +44,7 @@
     <form id="salir-form" th:action="@{/logout}" method="post">
         <button type="submit">Cerrar sesión</button>
     </form>
+    <br>
     <form action="/propietario/agregarInmueble" method="get">
         <button type="submit">Agregar Inmueble</button>
     </form>
@@ -70,10 +74,28 @@
         });
 
         $('.details-btn').click(function() {
+            // Funcionalidad para detalles
+        });
 
+        $(document).ready(function() {
+            $('.eliminar-inmueble').on('click', function() {
+                var id = $(this).data('id');
+                if (confirm('¿Estás seguro de que deseas eliminar este inmueble?')) {
+                    $.ajax({
+                        url: '/propietario/delete/' + id,
+                        type: 'DELETE',
+                        success: function(result) {
+                            alert('inmueble eliminado correctamente');
+                            window.location.reload();
+                        },
+                        error: function(err) {
+                            alert('Error al eliminar el inmueble');
+                        }
+                    });
+                }
+            });
         });
     });
 </script>
-
 </body>
 </html>

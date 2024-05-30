@@ -36,6 +36,6 @@ public class Funcionario {
     private String contrasena;
 
     @Column(name = "FUNCI_CELULAR", nullable = false)
-    private int celular;
+    private String celular;
 
 }

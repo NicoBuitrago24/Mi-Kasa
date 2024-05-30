@@ -15,5 +15,5 @@ public class FuncionarioDto implements Serializable {
     private String apellido;
     private String correo;
     private String contrasena;
-    private int celular;
+    private String celular;
 }

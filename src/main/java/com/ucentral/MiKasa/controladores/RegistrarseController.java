@@ -41,7 +41,7 @@ public class RegistrarseController {
                                                   @RequestParam("apellido") String apellido,
                                                   @RequestParam("correo") String correo,
                                                   @RequestParam("contrasena") String contrasena,
-                                                  @RequestParam("celular") int celular,
+                                                  @RequestParam("celular") String celular,
                                                   Model model) {
         switch(rol){
             case "cliente":

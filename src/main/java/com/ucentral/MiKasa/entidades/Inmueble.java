@@ -35,15 +35,14 @@ public class Inmueble implements Serializable {
     @Column(name = "INMU_AVALUO", nullable = false)
     private int avaluo;
 
+    @Column(name = "INMU_VALNOCHE", nullable = false)
+    private int valorNoche;
+
     @Column(name = "INMU_DIRECCION", nullable = false)
     private String direccion;
 
     @Column(name = "INMU_APROBADO", nullable = false)
     private boolean aprobado;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "FOTO_CODIGO", referencedColumnName = "FOTO_CODIGO")
-    private Foto fotos;
 
     @OneToMany(mappedBy = "inmueble", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Reserva> reservas;

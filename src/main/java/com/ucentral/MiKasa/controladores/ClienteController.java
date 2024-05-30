@@ -1,10 +1,6 @@
 package com.ucentral.MiKasa.controladores;
 
 import com.ucentral.MiKasa.dto.ClienteDto;
-import com.ucentral.MiKasa.servicios.FotoServicio;
-import com.ucentral.MiKasa.servicios.InmuebleServicio;
-import com.ucentral.MiKasa.servicios.ReservaServicio;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
