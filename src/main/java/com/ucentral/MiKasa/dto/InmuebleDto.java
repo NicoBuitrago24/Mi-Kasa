@@ -1,27 +1,26 @@
 package com.ucentral.MiKasa.dto;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import java.io.Serializable;
+import java.util.List;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @ToString
 public class InmuebleDto implements Serializable {
-    private long serial;
-    @NotBlank(message = "La ciudad es obligatorio")
+    private Long id;
     private String ciudad;
-    @NotBlank(message = "El barrio es obligatorio")
     private String barrio;
-    @NotBlank(message = "La descripcion es obligatorio")
     private String descripcion;
-    @NotBlank(message = "El avaluo es obligatorio")
-    private String avaluo;
-    @NotBlank(message = "Las fotos es obligatorio")
-    private String fotos;
-    @NotBlank(message = "El estado es obligatorio")
-    private String estado;
+    private int avaluo;
+    private int banios;
+    private int habitaciones;
+    private int valorNoche;
+    private String direccion;
+    private boolean aprobado;
+    private PropietarioDto propietario;
+    private List<ReservaDto> reservas;
 }

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Agregar Inmueble</title>
+    <link rel="stylesheet" href="/css/styleAgregarInmueble.css">
+</head>
+<body>
+<div class="container">
+    <h1>Agregar Inmueble</h1>
+    <form id="agregar-inmueble-form" action="/propietario/agregarInmueble" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="ciudad">Ciudad:</label>
+            <input type="text" id="ciudad" name="ciudad" required>
+        </div>
+        <div class="form-group">
+            <label for="barrio">Barrio:</label>
+            <input type="text" id="barrio" name="barrio" required>
+        </div>
+        <div class="form-group">
+            <label for="avaluo">Avaluo:</label>
+            <input type="number" id="avaluo" name="avaluo" required>
+        </div>
+        <div class="form-group">
+            <label for="habitaciones">Cantidad de habitaciones:</label>
+            <input type="number" id="habitaciones" name="habitaciones" required>
+        </div>
+        <div class="form-group">
+            <label for="banios">Cantidad de baños:</label>
+            <input type="number" id="banios" name="banios" required>
+        </div>
+        <div class="form-group">
+            <label for="direccion">Dirección:</label>
+            <input type="text" id="direccion" name="direccion" required>
+        </div>
+        <div class="form-group">
+            <label for="descripcion">Descripción:</label>
+            <textarea id="descripcion" name="descripcion" rows="4" required></textarea>
+        </div>
+        <div class="button-group">
+            <button type="button" id="guardar-btn">Guardar Inmueble</button>
+            <button class="back-btn" type="button" onclick="location.href='/propietario'">Volver</button>
+        </div>
+    </form>
+</div>
+<script>
+    document.getElementById('guardar-btn').addEventListener('click', function() {
+        var form = document.getElementById('agregar-inmueble-form');
+        var formData = new FormData(form);
+
+        fetch('/propietario/agregarInmueble', {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => {
+                if (response.ok) {
+                    alert('Exitoso');
+                    window.location.href = '/propietario';
+                } else {
+                    alert('Error al guardar el inmueble');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error al guardar el inmueble');
+            });
+    });
+</script>
+</body>
+</html>

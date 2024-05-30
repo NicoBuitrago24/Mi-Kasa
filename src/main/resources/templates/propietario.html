@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Propietario</title>
+    <link rel="stylesheet" href="/css/stylePropietario.css">
+</head>
+<body>
+<div class="container">
+    <h1>Hola, <span th:text="${propietario.nombre}"></span></h1>
+    <h2>Bienvenido propietario</h2>
+    <table class="styled-table">
+        <thead>
+        <tr>
+            <th>Ciudad</th>
+            <th>Barrio</th>
+            <th>Avaluo</th>
+            <th>Direccion</th>
+            <th>Aprobado</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <th:block th:if="${#lists.isEmpty(inmuebles)}">
+            <tr>
+                <td colspan="6">No hay inmuebles asociados</td>
+            </tr>
+        </th:block>
+        <th:block th:each="inmueble : ${inmuebles}">
+            <tr>
+                <td th:text="${inmueble.ciudad}"></td>
+                <td th:text="${inmueble.barrio}"></td>
+                <td th:text="${inmueble.avaluo}"></td>
+                <td th:text="${inmueble.direccion}"></td>
+                <td th:text="${inmueble.aprobado} ? 'Sí' : 'No'"></td>
+                <td>
+                    <a th:href="@{/resumen/{id}(id=${inmueble.id})}">
+                        <button class="details-btn">Ver Detalles</button>
+                    </a>
+                    <button class="eliminar-inmueble" th:attr="data-id=${inmueble.id}">Eliminar</button>
+                </td>
+            </tr>
+        </th:block>
+        </tbody>
+    </table>
+    <form id="salir-form" th:action="@{/logout}" method="post">
+        <button type="submit">Cerrar sesión</button>
+    </form>
+    <br>
+    <form action="/propietario/agregarInmueble" method="get">
+        <button type="submit">Agregar Inmueble</button>
+    </form>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#salir-form').submit(function(e) {
+            e.preventDefault();
+            var formData = $(this).serialize();
+            $.ajax({
+                url: '/logout',
+                type: 'POST',
+                data: formData,
+                success: function(result) {
+                    if (result === 'exitoso') {
+                        alert('Cierre de sesión exitoso');
+                        window.location.href = '/';
+                    }
+                },
+                error: function(err) {
+                    console.error('Error al enviar la solicitud:', err);
+                    alert('Ocurrió un error con el acceso. Por favor, inténtalo de nuevo más tarde.');
+                }
+            });
+        });
+
+        $(document).ready(function() {
+            $('.eliminar-inmueble').on('click', function() {
+                var id = $(this).data('id');
+                if (confirm('¿Estás seguro de que deseas eliminar este inmueble?')) {
+                    $.ajax({
+                        url: '/propietario/delete/' + id,
+                        type: 'DELETE',
+                        success: function(result) {
+                            alert('Inmueble eliminado correctamente');
+                            window.location.reload();
+                        },
+                        error: function(err) {
+                            alert('Error al eliminar el inmueble');
+                        }
+                    });
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>

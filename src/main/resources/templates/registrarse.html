@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario de Registro</title>
+    <link rel="stylesheet" href="/css/styleRegistrarse.css">
+    <script>
+        window.onload = function() {
+            var roleSelect = document.getElementById('role');
+            var commonFields = document.getElementById('common-fields');
+
+            roleSelect.addEventListener('change', function() {
+                var selectedRole = this.value;
+                commonFields.classList.remove('hidden');
+            });
+        };
+    </script>
+</head>
+<body>
+<div class="container">
+    <div class="registrarse">
+        <h2>Registro</h2>
+        <div class="form">
+            <form id="registration-form" th:action="@{/registrarse}" method="post">
+                <div class="input-group">
+                    <label for="role">Seleccione su rol</label>
+                    <select id="role" name="role" required>
+                        <option value="">Seleccione...</option>
+                        <option value="cliente">Cliente</option>
+                        <option value="funcionario">Funcionario</option>
+                        <option value="propietario">Propietario</option>
+                    </select>
+                </div>
+
+                <div id="common-fields" class="hidden">
+                    <div class="input-group">
+                        <label for="nombre">Nombre</label>
+                        <input type="text" id="nombre" name="nombre" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="apellido">Apellido</label>
+                        <input type="text" id="apellido" name="apellido" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="correo">Correo</label>
+                        <input type="email" id="correo" name="correo" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Ingrese un correo electrónico válido">
+                    </div>
+                    <div class="input-group">
+                        <label for="contrasena">Contraseña</label>
+                        <input type="password" id="contrasena" name="contrasena" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="celular">Celular</label>
+                        <input type="tel" id="celular" name="celular" required>
+                    </div>
+                    <button type="submit" class="btn">Registrarse</button>
+                </div>
+            </form>
+        </div>
+        <button class="back-btn" type="button" onclick="location.href='/'">Volver</button>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('form').submit(function(e) {
+            e.preventDefault();
+            var formData = $(this).serialize();
+
+            $.ajax({
+                url: '/registrarse',
+                type: 'POST',
+                data: formData,
+                success: function(result) {
+                    if (result === 'success') {
+                        alert('Registro exitoso');
+                        window.location.href = '/';
+                    } else {
+                        alert('Error en el registro');
+                    }
+                },
+                error: function(err) {
+                    console.error('Error al enviar la solicitud:', err);
+                    alert('Verifique los campos del formulario e intente nuevamente.');
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>

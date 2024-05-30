@@ -4,10 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.hibernate.annotations.Fetch;
 
-import java.io.Serializable;
 import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -19,7 +18,7 @@ public class Propietario {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_PROPI_REL")
     @SequenceGenerator(name = "SEQ_PROPI_REL", sequenceName = "SEQ_PROPI_REL", allocationSize = 1)
     @Column(name = "PROPI_CODIGO", nullable = false)
-    private long serial;
+    private long id;
 
     @Column(name = "PROPI_NOMBRE", nullable = false)
     private String nombre;
@@ -33,9 +32,9 @@ public class Propietario {
     @Column(name = "PROPI_CONTRASENA", nullable = false)
     private String contrasena;
 
-    @Column(name = "PROPI_INMUEBLE", nullable = false)
-    private String inmueble;
+    @Column(name = "PROPI_CELULAR", nullable = false)
+    private String celular;
 
-
-
+    @OneToMany(mappedBy = "propietario", cascade = CascadeType.ALL)
+    private List<Inmueble> inmuebles;
 }

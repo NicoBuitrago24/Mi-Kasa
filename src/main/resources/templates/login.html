@@ -1,0 +1,101 @@
+<!doctype html>
+
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Login</title>
+
+    <link rel="stylesheet" href="/css/styleLogin.css">
+
+</head>
+
+<body>
+
+<section> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+
+    <div class="signin">
+
+        <div class="content">
+
+            <h2>Ingreso</h2>
+
+            <div class="form">
+
+                <form th:action="@{/login}" method="post" th:object="${loginDto}">
+
+                <div class="inputBox">
+
+                        <input type="text" id="correo" name="correo" th:field="*{correo}" required> <i>Correo</i>
+
+                    </div>
+
+                    <br>
+                    <br>
+
+                    <div class="inputBox">
+
+                        <input type="password" id="clave" name="clave" th:field="*{contrasena}" required> <i>Clave</i>
+
+                    </div>
+
+                    <br>
+                    <br>
+
+                    <div class="links"> <a th:href="@{/registrarse}">Registrarse</a>
+
+                    </div>
+
+                    <br>
+                    <br>
+
+                    <div class="inputBox">
+
+                        <input type="submit" value="Iniciar sesión">
+
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('form').submit(function(e) {
+            e.preventDefault();
+            var formData = $(this).serialize();
+            $.ajax({
+                url: '/login',
+                type: 'POST',
+                data: formData,
+                success: function(result) {
+                    if (result === 'cliente') {
+                        alert('Ingreso exitoso');
+                        window.location.href = '/cliente';
+                    } else if (result === 'propietario') {
+                        alert('Ingreso exitoso');
+                        window.location.href = '/propietario';
+                    } else if (result === 'funcionario') {
+                        alert('Ingreso exitoso');
+                        window.location.href = '/funcionario';
+                    }
+                },
+                error: function(err) {
+                    console.error('Error al enviar la solicitud:', err);
+                    alert('Ocurrió un error con el acceso. Por favor, inténtalo de nuevo más tarde.');
+                }
+            });
+        });
+    });
+</script>
+
+</body>
+
+</html>
