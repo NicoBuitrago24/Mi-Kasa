@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario de Reserva</title>
+    <link rel="stylesheet" href="/css/styleRegistrarse.css">
+</head>
+<body>
+<div class="container">
+    <h1>Reservar Inmueble</h1>
+    <form id="reserva-form" action="/reserva" method="post">
+
+        <input type="hidden" name="inmuebleId" th:value="${inmueble.id}">
+
+        <div class="form-group">
+            <label for="fecha-inicio">Fecha de Inicio:</label>
+            <input type="date" id="fecha-inicio" name="fechaInicio" required>
+        </div>
+
+        <div class="form-group">
+            <label for="fecha-fin">Fecha de Fin:</label>
+            <input type="date" id="fecha-fin" name="fechaFin" required>
+        </div>
+
+        <div class="form-group">
+            <label for="numero-huespedes">Número de Huéspedes:</label>
+            <input type="number" id="numero-huespedes" name="cantHuespedes" required>
+        </div>
+
+        <div class="form-group">
+            <label for="tipo-pago">Tipo de Pago:</label>
+            <select id="tipo-pago" name="tipoPago">
+                <option value="tarjeta">Tarjeta de Crédito</option>
+                <option value="efectivo">Efectivo</option>
+                <option value="transferencia">Transferencia Bancaria</option>
+            </select>
+        </div>
+
+        <button type="button" onclick="realizarReserva()">Realizar Reserva</button>
+    </form>
+</div>
+
+<script>
+    function realizarReserva() {
+        var formData = new FormData(document.getElementById("reserva-form"));
+
+        fetch('/reserva', {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => {
+                if (response.ok) {
+                    alert('Exitoso');
+                    window.location.href = '/cliente';
+                } else {
+                    alert('Error al realizar la reserva');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error al realizar la reserva');
+            });
+    }
+</script>
+
+</body>
+</html>

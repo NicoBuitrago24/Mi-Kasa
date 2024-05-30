@@ -37,4 +37,7 @@ public class Cliente {
 
     @Column(name = "CLIEN_CONTRASENA", nullable = false)
     private String contrasena;
+
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Reserva> reservas;
 }

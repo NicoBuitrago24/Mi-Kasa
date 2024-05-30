@@ -58,6 +58,7 @@ public class RegistrarseController {
                 clienteDto.setCorreo(correo);
                 clienteDto.setContrasena(contrasena);
                 clienteDto.setCelular(celular);
+                clienteDto.setReservas(new ArrayList<>());
                 clienteServicio.registrarCliente(clienteDto);
                 break;
             case "propietario":

@@ -70,7 +70,7 @@
                 <td th:text="${inmueble.valorNoche}"></td>
                 <td>
                     <button class="details-btn" th:attr="data-id=${inmueble.id}">Ver Detalles</button>
-                    <button class="alquilar-btn" th:attr="data-id=${inmueble.id}">Alquilar</button>
+                    <button class="alquilar-btn" th:attr="data-url=@{/formularioReserva(inmuebleId=${inmueble.id})}">Alquilar</button>
                 </td>
             </tr>
         </th:block>
@@ -183,8 +183,8 @@
         });
 
         $(document).on('click', '.alquilar-btn', function() {
-            var id = $(this).data('id');
-            alert('Funcionalidad de alquilar aún no implementada');
+            var url = $(this).data('url');
+            window.location.href = url;
         });
     });
 </script>

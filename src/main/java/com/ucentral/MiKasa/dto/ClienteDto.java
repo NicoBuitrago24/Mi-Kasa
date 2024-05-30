@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import java.io.Serializable;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,4 +18,5 @@ public class ClienteDto implements Serializable {
     private String correo;
     private String celular;
     private String contrasena;
+    private List<ReservaDto> reservas;
 }

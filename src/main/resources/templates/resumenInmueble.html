@@ -34,12 +34,14 @@
                 <td colspan="3">No hay reservas para este inmueble</td>
             </tr>
         </th:block>
+        ...
         <th:block th:each="reserva : ${inmueble.reservas}">
             <tr>
-                <td th:text="${reserva.fechaInicio}"></td>
-                <td th:text="${reserva.fechaFin}"></td>
-                <td th:text="${reserva.huesped.nombre}"></td>
+                <td><span th:text="${#dates.format(reserva.fechaInicio, 'dd/MM/yyyy')}"></span></td>
+                <td><span th:text="${#dates.format(reserva.fechaFin, 'dd/MM/yyyy')}"></span></td>
+                <td th:text="${reserva.cliente.nombre}"></td>
             </tr>
+        </th:block>
         </th:block>
         </tbody>
     </table>
