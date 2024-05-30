@@ -32,9 +32,11 @@
                 <td th:text="${inmueble.barrio}"></td>
                 <td th:text="${inmueble.avaluo}"></td>
                 <td th:text="${inmueble.direccion}"></td>
-                <td th:text="${inmueble.aprobado} ? 'Si' : 'No'"></td>
+                <td th:text="${inmueble.aprobado} ? 'Sí' : 'No'"></td>
                 <td>
-                    <button class="details-btn" onclick="verDetalles()">Detalles</button>
+                    <a th:href="@{/resumen/{id}(id=${inmueble.id})}">
+                        <button class="details-btn">Ver Detalles</button>
+                    </a>
                     <button class="eliminar-inmueble" th:attr="data-id=${inmueble.id}">Eliminar</button>
                 </td>
             </tr>
@@ -73,10 +75,6 @@
             });
         });
 
-        $('.details-btn').click(function() {
-            // Funcionalidad para detalles
-        });
-
         $(document).ready(function() {
             $('.eliminar-inmueble').on('click', function() {
                 var id = $(this).data('id');
@@ -85,7 +83,7 @@
                         url: '/propietario/delete/' + id,
                         type: 'DELETE',
                         success: function(result) {
-                            alert('inmueble eliminado correctamente');
+                            alert('Inmueble eliminado correctamente');
                             window.location.reload();
                         },
                         error: function(err) {

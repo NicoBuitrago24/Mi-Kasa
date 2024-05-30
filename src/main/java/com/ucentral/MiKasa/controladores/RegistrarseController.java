@@ -43,6 +43,13 @@ public class RegistrarseController {
                                                   @RequestParam("contrasena") String contrasena,
                                                   @RequestParam("celular") String celular,
                                                   Model model) {
+
+        if (clienteServicio.esCliente(correo) ||
+                propietarioServicio.esPropietario(correo) ||
+                funcionarioServicio.esFuncionario(correo)) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("El correo electrónico ya está en uso.");
+        }
+
         switch(rol){
             case "cliente":
                 ClienteDto clienteDto = new ClienteDto();

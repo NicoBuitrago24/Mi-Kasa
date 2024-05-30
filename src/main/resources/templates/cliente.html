@@ -1,10 +1,192 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>Cliente</title>
+    <link rel="stylesheet" href="/css/stylePropietario.css">
+    <style>
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0,0.4);
+            padding-top: 60px;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 60%;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-<h1>Hola desde cliente</h1>
+<div class="container">
+    <h1>Bienvenido, <span th:text="${cliente.nombre}"></span></h1>
+    <h2>Sistema de reservas</h2>
+    <table class="styled-table">
+        <thead>
+        <tr>
+            <th>Ciudad</th>
+            <th>Barrio</th>
+            <th>Dirección</th>
+            <th>Valor por Noche</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <th:block th:if="${#lists.isEmpty(inmueblesAprobados)}">
+            <tr>
+                <td colspan="5">No hay inmuebles disponibles para reservar</td>
+            </tr>
+        </th:block>
+        <th:block th:each="inmueble : ${inmueblesAprobados}">
+            <tr>
+                <td th:text="${inmueble.ciudad}"></td>
+                <td th:text="${inmueble.barrio}"></td>
+                <td th:text="${inmueble.direccion}"></td>
+                <td th:text="${inmueble.valorNoche}"></td>
+                <td>
+                    <button class="details-btn" th:attr="data-id=${inmueble.id}">Ver Detalles</button>
+                    <button class="alquilar-btn" th:attr="data-id=${inmueble.id}">Alquilar</button>
+                </td>
+            </tr>
+        </th:block>
+        </tbody>
+    </table>
+    <form id="salir-form" th:action="@{/logout}" method="post">
+        <button type="submit">Cerrar sesión</button>
+    </form>
+</div>
+
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Resumen del Inmueble</h2>
+        <table>
+            <tr>
+                <th>Ciudad:</th>
+                <td id="modal-ciudad"></td>
+            </tr>
+            <tr>
+                <th>Barrio:</th>
+                <td id="modal-barrio"></td>
+            </tr>
+            <tr>
+                <th>Dirección:</th>
+                <td id="modal-direccion"></td>
+            </tr>
+            <tr>
+                <th>Valor por Noche:</th>
+                <td id="modal-valor"></td>
+            </tr>
+            <tr>
+                <th>Descripción:</th>
+                <td id="modal-descripcion"></td>
+            </tr>
+            <tr>
+                <th>Cantidad de Habitaciones:</th>
+                <td id="modal-habitaciones"></td>
+            </tr>
+            <tr>
+                <th>Cantidad de Baños:</th>
+                <td id="modal-banios"></td>
+            </tr>
+            <tr>
+                <th>Cantidad de Huéspedes:</th>
+                <td id="modal-huespedes"></td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+
+        $('.details-btn').click(function() {
+            var id = $(this).data('id');
+            $.ajax({
+                url: '/inmueble/' + id,
+                type: 'GET',
+                success: function(inmueble) {
+                    $('#modal-ciudad').text(inmueble.ciudad);
+                    $('#modal-barrio').text(inmueble.barrio);
+                    $('#modal-direccion').text(inmueble.direccion);
+                    $('#modal-valor').text(inmueble.valorNoche);
+                    $('#modal-descripcion').text(inmueble.descripcion);
+                    $('#modal-habitaciones').text(inmueble.habitaciones);
+                    $('#modal-banios').text(inmueble.banios);
+                    var huespedes = inmueble.habitaciones * 3;
+                    $('#modal-huespedes').text(huespedes);
+                    $('#myModal').show();
+                },
+                error: function(err) {
+                    console.error('Error al obtener los detalles del inmueble:', err);
+                    alert('Ocurrió un error al obtener los detalles del inmueble. Por favor, inténtalo de nuevo más tarde.');
+                }
+            });
+        });
+
+
+        $('.close').click(function() {
+            $('#myModal').hide();
+        });
+
+        window.onclick = function(event) {
+            var modal = document.getElementById('myModal');
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        };
+
+        $('#salir-form').submit(function(e) {
+            e.preventDefault();
+            var formData = $(this).serialize();
+            $.ajax({
+                url: '/logout',
+                type: 'POST',
+                data: formData,
+                success: function(result) {
+                    if (result === 'exitoso') {
+                        alert('Cierre de sesión exitoso');
+                        window.location.href = '/';
+                    }
+                },
+                error: function(err) {
+                    console.error('Error al enviar la solicitud:', err);
+                    alert('Ocurrió un error con el acceso. Por favor, inténtalo de nuevo más tarde.');
+                }
+            });
+        });
+
+        $(document).on('click', '.alquilar-btn', function() {
+            var id = $(this).data('id');
+            alert('Funcionalidad de alquilar aún no implementada');
+        });
+    });
+</script>
 </body>
 </html>

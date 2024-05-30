@@ -12,7 +12,7 @@ import java.util.Date;
 @ToString
 
 public class ReservaDto implements Serializable {
-    private long serial;
+    private long id;
     private Date fecha_inicio;
     private Date fecha_fin;
     private int numerohuespedes;

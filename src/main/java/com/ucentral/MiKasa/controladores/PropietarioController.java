@@ -39,6 +39,8 @@ public class PropietarioController {
             @RequestParam("ciudad") String ciudad,
             @RequestParam("barrio") String barrio,
             @RequestParam("avaluo") int avaluo,
+            @RequestParam("habitaciones") int habitaciones,
+            @RequestParam("banios") int banios,
             @RequestParam("direccion") String direccion,
             @RequestParam("descripcion") String descripcion,
             Model model) {
@@ -52,6 +54,8 @@ public class PropietarioController {
         nuevoInmueble.setCiudad(ciudad);
         nuevoInmueble.setBarrio(barrio);
         nuevoInmueble.setAvaluo(avaluo);
+        nuevoInmueble.setHabitaciones(habitaciones);
+        nuevoInmueble.setBanios(banios);
         nuevoInmueble.setDireccion(direccion);
         nuevoInmueble.setDescripcion(descripcion);
         nuevoInmueble.setAprobado(false);

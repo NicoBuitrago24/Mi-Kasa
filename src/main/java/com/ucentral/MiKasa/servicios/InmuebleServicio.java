@@ -59,4 +59,21 @@ public class InmuebleServicio {
                 .map(inmueble -> modelMapper.map(inmueble, InmuebleDto.class))
                 .collect(Collectors.toList());
     }
+
+    public List<InmuebleDto> obtenerInmueblesAprobados() {
+        List<Inmueble> inmuebles = inmuebleRepositorio.findByAprobadoTrue();
+        return inmuebles.stream()
+                .map(inmueble -> modelMapper.map(inmueble, InmuebleDto.class))
+                .collect(Collectors.toList());
+    }
+
+    public void aprobarInmueble(Long id, int valorNoche) {
+        Optional<Inmueble> optionalInmueble = inmuebleRepositorio.findById(id);
+        if (optionalInmueble.isPresent()) {
+            Inmueble inmueble = optionalInmueble.get();
+            inmueble.setValorNoche(valorNoche);
+            inmueble.setAprobado(true);
+            inmuebleRepositorio.save(inmueble);
+        }
+    }
 }

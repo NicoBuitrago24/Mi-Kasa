@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Resumen Inmueble</title>
+    <link rel="stylesheet" href="/css/stylePropietario.css">
+</head>
+<body>
+<div class="container">
+    <h1>Resumen del Inmueble</h1>
+    <div class="inmueble-details">
+        <p><strong>Ciudad:</strong> <span th:text="${inmueble.ciudad}"></span></p>
+        <p><strong>Barrio:</strong> <span th:text="${inmueble.barrio}"></span></p>
+        <p><strong>Descripción:</strong> <span th:text="${inmueble.descripcion}"></span></p>
+        <p><strong>Avalúo:</strong> <span th:text="${inmueble.avaluo}"></span></p>
+        <p><strong>Baños:</strong> <span th:text="${inmueble.banios}"></span></p>
+        <p><strong>Habitaciones:</strong> <span th:text="${inmueble.habitaciones}"></span></p>
+        <p><strong>Dirección:</strong> <span th:text="${inmueble.direccion}"></span></p>
+        <p><strong>Aprobado:</strong> <span th:text="${inmueble.aprobado} ? 'Sí' : 'No'"></span></p>
+        <p th:if="${inmueble.aprobado}"><strong>Valor por Noche:</strong> <span th:text="${inmueble.valorNoche}"></span></p>
+    </div>
+    <h2>Reservas</h2>
+    <table class="styled-table">
+        <thead>
+        <tr>
+            <th>Fecha Inicio</th>
+            <th>Fecha Fin</th>
+            <th>Huésped</th>
+        </tr>
+        </thead>
+        <tbody>
+        <th:block th:if="${#lists.isEmpty(inmueble.reservas)}">
+            <tr>
+                <td colspan="3">No hay reservas para este inmueble</td>
+            </tr>
+        </th:block>
+        <th:block th:each="reserva : ${inmueble.reservas}">
+            <tr>
+                <td th:text="${reserva.fechaInicio}"></td>
+                <td th:text="${reserva.fechaFin}"></td>
+                <td th:text="${reserva.huesped.nombre}"></td>
+            </tr>
+        </th:block>
+        </tbody>
+    </table>
+    <form action="/propietario" method="get">
+        <button type="submit">Regresar</button>
+    </form>
+</div>
+</body>
+</html>
