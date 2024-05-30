@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface InmuebleRepositorio extends JpaRepository<Inmueble, Long>, JpaSpecificationExecutor<Inmueble> {
     List<Inmueble> findByPropietarioId(Long propietarioId);
+    List<Inmueble> findByAprobadoFalse();
 }

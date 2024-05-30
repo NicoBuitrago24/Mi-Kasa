@@ -3,8 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <title>Funcionario</title>
+    <link rel="stylesheet" href="/css/stylePropietario.css">
 </head>
 <body>
-<h1>Hola desde funcionario</h1>
+<div class="container">
+    <h1>Hola, <span th:text="${funcionario.nombre}"></span></h1>
+    <h2>Bienvenido funcionario</h2>
+
+    <table class="styled-table">
+        <thead>
+        <tr>
+            <th>Correo Propietario</th>
+            <th>Dirección</th>
+            <th>Barrio</th>
+            <th>Ciudad</th>
+            <th>Aprobar</th>
+        </tr>
+        </thead>
+        <tbody>
+        <th:block th:if="${#lists.isEmpty(inmueblesNoAprobados)}">
+            <tr>
+                <td colspan="6">No hay inmuebles por aprobar</td>
+            </tr>
+        </th:block>
+        <th:block th:each="inmueble : ${inmueblesNoAprobados}">
+            <tr>
+                <td th:text="${inmueble.propietario.correo}"></td>
+                <td th:text="${inmueble.direccion}"></td>
+                <td th:text="${inmueble.barrio}"></td>
+                <td th:text="${inmueble.ciudad}"></td>
+                <td><button>Aprobar</button></td>
+            </tr>
+        </th:block>
+        </tbody>
+    </table>
+</div>
 </body>
 </html>

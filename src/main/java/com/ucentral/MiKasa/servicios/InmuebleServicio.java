@@ -52,4 +52,11 @@ public class InmuebleServicio {
                 .map(inmueble -> modelMapper.map(inmueble, InmuebleDto.class))
                 .collect(Collectors.toList());
     }
+
+    public List<InmuebleDto> obtenerInmueblesNoAprobados() {
+        List<Inmueble> inmuebles = inmuebleRepositorio.findByAprobadoFalse();
+        return inmuebles.stream()
+                .map(inmueble -> modelMapper.map(inmueble, InmuebleDto.class))
+                .collect(Collectors.toList());
+    }
 }
